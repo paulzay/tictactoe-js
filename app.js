@@ -19,10 +19,18 @@ const gameBoard = (() => {
 	let currentPlayerMarker = player1.marker;
 
 	let messageBoard = document.querySelector('.game-board');
-	const currentPlayerTurn = () => `It is now your turn ${currentPlayerName}`
-
-	const placeMarker = (event) => {
-		event.addEventListener('click', )
+	const currentPlayerTurn = () => `It is now your turn ${currentPlayerName}`;
+	const winningMessage = () => `${currentPlayerName} wins`;
+	const drawMessage = () => `It is a draw`;
+		
+	function checkCellClick(clickedCell) {
+			
 	}
 
+	
+
 })();
+
+
+
+document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', checkCellClick));
