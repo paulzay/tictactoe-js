@@ -22,7 +22,7 @@ const gameBoard = (() => {
 	const currentPlayerTurn = () => `It is now your turn ${currentPlayerName}`;
 	const winningMessage = () => `${currentPlayerName} wins`;
 	const drawMessage = () => `It is a draw`;
-	const gameOn = true;
+	gameOn = true;
 
 	const placeMarker = (clickedCell, clickedCellIndex) => {
 	  	board[clickedCellIndex] = currentPlayerMarker;
@@ -39,7 +39,19 @@ const gameBoard = (() => {
 	    placeMarker(clickedCell, clickedCellIndex);
 	};
 
+	const resetGame = () => {
+	    location.reload()
+	}
+	document.querySelector('.game-reset').addEventListener('click', resetGame);
 
+	const clearBoard = () =>{
+		gameOn = true;
+		let currentPlayerMarker = player1.marker;
+		let currentPlayerName = player1.name;
+		board = ["", "", "", "", "", "", "", "", ""];
+		document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = '')
+	}
+	document.querySelector('.clear-board').addEventListener('click', clearBoard);
 	// const play = (target, marker) => {
 	// 	board[target] = currentPlayerMarker;
 	// }
