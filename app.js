@@ -11,9 +11,9 @@ const gameBoard = (() => {
 
   let ask = true;
   while (ask) {
-    player1.name = prompt('Enter your name player1');
+    player1.name = prompt('Enter your name player1'); // eslint-disable-line no-alert
     if (player1.name !== '') {
-      player2.name = prompt('Enter your name player2');
+      player2.name = prompt('Enter your name player2'); // eslint-disable-line no-alert
       if (player2.name !== '') {
         ask = false;
         break;
