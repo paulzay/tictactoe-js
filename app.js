@@ -9,8 +9,17 @@ const gameBoard = (() => {
   const player1 = playerFactory('', 'X');
   const player2 = playerFactory('', 'O');
 
-  player1.name = prompt('Enter your name player1');
-  player2.name = prompt('Enter your name player2');
+  let ask = true;
+  while (ask) {
+    player1.name = prompt('Enter your name player1');
+    if (player1.name !== '') {
+      player2.name = prompt('Enter your name player2');
+      if (player2.name !== '') {
+        ask = false;
+        break;
+      }
+    }
+  }
 
   let currentPlayerName = player1.name;
   let currentPlayerMarker = player1.marker;
