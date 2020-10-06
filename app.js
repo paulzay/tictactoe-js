@@ -22,15 +22,29 @@ const gameBoard = (() => {
 	const currentPlayerTurn = () => `It is now your turn ${currentPlayerName}`;
 	const winningMessage = () => `${currentPlayerName} wins`;
 	const drawMessage = () => `It is a draw`;
-		
-	function checkCellClick(clickedCell) {
-			
-	}
+	const gameOn = true;
 
-	
+	const placeMarker = (clickedCell, clickedCellIndex) => {
+	  	board[clickedCellIndex] = currentPlayerMarker;
+	    clickedCell.innerHTML = currentPlayerMarker;
+	}
+	const checkCellClick =(clickedCellEvent) => {
+		const clickedCell = clickedCellEvent.target;
+	    const clickedCellIndex = parseInt(
+	      clickedCell.getAttribute('data-cell-index')
+	    );
+	    if (board[clickedCellIndex] !== "" || !gameOn) {
+	        return;
+	    }
+	    placeMarker(clickedCell, clickedCellIndex);
+	};
+
+
+	// const play = (target, marker) => {
+	// 	board[target] = currentPlayerMarker;
+	// }
+	document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', checkCellClick));
 
 })();
 
 
-
-document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', checkCellClick));
