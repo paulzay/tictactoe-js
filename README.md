@@ -32,7 +32,7 @@
 
 ## Live Demo
 
-[Live Demo]
+[Live Demo](https://raw.githack.com/paulzay/tictactoe-js/features/index.html)
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
