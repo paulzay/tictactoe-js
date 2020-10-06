@@ -37,6 +37,7 @@ const gameBoard = (() => {
 	        return;
 	    }
 	    placeMarker(clickedCell, clickedCellIndex);
+	    takeTurns();
 	};
 
 	const resetGame = () => {
@@ -56,6 +57,13 @@ const gameBoard = (() => {
 	// 	board[target] = currentPlayerMarker;
 	// }
 	document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', checkCellClick));
+
+	const takeTurns = () =>{
+
+		currentPlayerMarker = currentPlayerMarker === 'X'? 'O' : 'X';
+		currentPlayerName = currentPlayerName === player1.name ? player2.name : player1.name;
+
+	}
 
 })();
 
