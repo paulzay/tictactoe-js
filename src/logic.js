@@ -1,9 +1,18 @@
-const playerFactory = (name, marker) => ({
+export const playerFactory = (name, marker) => ({
   name,
   marker,
 });
 
-const gameBoard = (() => {
+export const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+
+// export const getBoard = (()=>{
+//   let board = ['', '', '', '', '', '', '', '', ''];
+//   return board;
+// });
+
+export const gameBoard = (() => {
+  let gameOn = true;
   let board = ['', '', '', '', '', '', '', '', ''];
 
   const player1 = playerFactory('', 'X');
@@ -28,7 +37,6 @@ const gameBoard = (() => {
   const currentPlayerTurn = () => `It is now your turn ${currentPlayerName}`;
   const winningMessage = () => `${currentPlayerName} wins`;
   const drawMessage = () => 'It is a draw';
-  let gameOn = true;
 
 
   const resetGame = () => { window.location.reload(); };
@@ -52,8 +60,6 @@ const gameBoard = (() => {
 
   const checkWinner = () => {
     let winner = false;
-    const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
-      [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     const result = winConditions.some((indices) => (
       board[indices[0]] === currentPlayerMarker
       && board[indices[1]] === currentPlayerMarker
@@ -95,5 +101,9 @@ const gameBoard = (() => {
   };
 
   document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', checkCellClick));
+  document.querySelector('.clear-board').addEventListener('click', clearBoard);
+  return {
+    board,
+
+  };
 });
-gameBoard();
