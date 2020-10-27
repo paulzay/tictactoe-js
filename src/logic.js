@@ -6,15 +6,22 @@ export const playerFactory = (name, marker) => ({
 export const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
   [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
-// export const getBoard = (()=>{
-//   let board = ['', '', '', '', '', '', '', '', ''];
-//   return board;
-// });
+export const getBoard = (()=> {
+  const board = ['', '', '', '', '', '', '', '', ''];
+  return board;
+});
+
+export const clearBoard = (gameOnBool, currentBoard, message, turn) => {
+  gameOnBool = true;
+  currentBoard = getBoard();
+  message.innerHTML = turn;
+  document.querySelectorAll('.cell').forEach(cell => { cell.innerHTML = ''; });
+  alert('I am working');
+};
 
 export const gameBoard = (() => {
   let gameOn = true;
-  let board = ['', '', '', '', '', '', '', '', ''];
-
+  let board = getBoard();
   const player1 = playerFactory('', 'X');
   const player2 = playerFactory('', 'O');
 
@@ -43,19 +50,23 @@ export const gameBoard = (() => {
 
   document.querySelector('.game-reset').addEventListener('click', resetGame);
 
-  const clearBoard = () => {
-    gameOn = true;
-    board = ['', '', '', '', '', '', '', '', ''];
-    messageBoard.innerHTML = currentPlayerTurn();
-    document.querySelectorAll('.cell').forEach(cell => { cell.innerHTML = ''; });
-  };
-  document.querySelector('.clear-board').addEventListener('click', clearBoard);
+  // const clearBoard = () => {
+  //   gameOn = true;
+  //   board = getBoard();
+  //   messageBoard.innerHTML = currentPlayerTurn();
+  //   document.querySelectorAll('.cell').forEach(cell => { cell.innerHTML = ''; });
+  //   alert('Hello');
+  // };
 
-  const takeTurns = () => {
+  document.querySelector('.clear-board').addEventListener('click', () => {
+    clearBoard(gameOn, board, messageBoard, currentPlayerTurn());
+  });
+
+  function takeTurns() {
     currentPlayerMarker = currentPlayerMarker === 'X' ? 'O' : 'X';
     currentPlayerName = currentPlayerName === player1.name ? player2.name : player1.name;
     messageBoard.innerHTML = currentPlayerTurn();
-  };
+  }
 
 
   const checkWinner = () => {
@@ -87,6 +98,7 @@ export const gameBoard = (() => {
   const placeMarker = (clickedCell, clickedCellIndex) => {
     board[clickedCellIndex] = currentPlayerMarker;
     clickedCell.innerHTML = currentPlayerMarker;
+    console.log(board);
   };
   const checkCellClick = (clickedCellEvent) => {
     const clickedCell = clickedCellEvent.target;
@@ -101,9 +113,5 @@ export const gameBoard = (() => {
   };
 
   document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', checkCellClick));
-  document.querySelector('.clear-board').addEventListener('click', clearBoard);
-  return {
-    board,
-
-  };
+  // document.querySelector('.clear-board').addEventListener('click', clearBoard);
 });

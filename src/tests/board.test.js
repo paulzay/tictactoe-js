@@ -1,17 +1,17 @@
 import {
-  gameBoard, winConditions, playerFactory,
+  winConditions, playerFactory, getBoard,
 } from '../logic';
 
 
 test('the board should initially be empty', () => {
-  const newBoard = gameBoard().board;
-  expect(newBoard).toEqual(['', '', '', '', '', '', '', '', '']);
+  expect(getBoard()).toEqual(['', '', '', '', '', '', '', '', '']);
 });
 
 
 test('There should be 8 possible winning conditions', () => {
   expect(winConditions.length).toEqual(8);
 });
+
 test('winConditions should be an array', () => {
   expect(typeof winConditions).toBe('object');
 });
