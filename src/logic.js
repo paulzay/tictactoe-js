@@ -6,17 +6,15 @@ export const playerFactory = (name, marker) => ({
 export const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
   [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
-export const getBoard = (()=> {
+export const getBoard = (() => {
   const board = ['', '', '', '', '', '', '', '', ''];
   return board;
 });
 
-export const clearBoard = (gameOnBool, currentBoard, message, turn) => {
-  gameOnBool = true;
-  currentBoard = getBoard();
-  message.innerHTML = turn;
+export const clearBoard = (gameOn, messageBoard, turn) => {
+  gameOn = true;
+  messageBoard.innerHTML = turn;
   document.querySelectorAll('.cell').forEach(cell => { cell.innerHTML = ''; });
-  alert('I am working');
 };
 
 export const gameBoard = (() => {
@@ -59,7 +57,8 @@ export const gameBoard = (() => {
   // };
 
   document.querySelector('.clear-board').addEventListener('click', () => {
-    clearBoard(gameOn, board, messageBoard, currentPlayerTurn());
+    board = getBoard();
+    clearBoard(gameOn, messageBoard, currentPlayerTurn());    
   });
 
   function takeTurns() {
@@ -98,7 +97,7 @@ export const gameBoard = (() => {
   const placeMarker = (clickedCell, clickedCellIndex) => {
     board[clickedCellIndex] = currentPlayerMarker;
     clickedCell.innerHTML = currentPlayerMarker;
-    console.log(board);
+    // console.log(board);
   };
   const checkCellClick = (clickedCellEvent) => {
     const clickedCell = clickedCellEvent.target;
