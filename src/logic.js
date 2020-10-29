@@ -16,6 +16,12 @@ export const clearBoard = (messageBoard, turn) => {
   document.querySelectorAll('.cell').forEach(cell => { cell.innerHTML = ''; });
 };
 
+export const drawMessage = () => 'It is a draw';
+
+export const winningMessage = currentPlayerName => `${currentPlayerName} wins`;
+
+export const currentPlayerTurn = currentPlayerName => `It is now your turn ${currentPlayerName}`;
+
 export const gameBoard = (() => {
   let gameOn = true;
   let board = getBoard();
@@ -38,11 +44,7 @@ export const gameBoard = (() => {
   let currentPlayerMarker = player1.marker;
 
   const messageBoard = document.querySelector('.game-board');
-  const currentPlayerTurn = () => `It is now your turn ${currentPlayerName}`;
-  const winningMessage = () => `${currentPlayerName} wins`;
-  const drawMessage = () => 'It is a draw';
-
-
+  
   const resetGame = () => { window.location.reload(); };
 
   document.querySelector('.game-reset').addEventListener('click', resetGame);
@@ -50,14 +52,14 @@ export const gameBoard = (() => {
 
   document.querySelector('.clear-board').addEventListener('click', () => {
     board = getBoard();
-    clearBoard(messageBoard, currentPlayerTurn());
+    clearBoard(messageBoard, currentPlayerTurn(currentPlayerName));
     gameOn = true;
   });
 
   function takeTurns() {
     currentPlayerMarker = currentPlayerMarker === 'X' ? 'O' : 'X';
     currentPlayerName = currentPlayerName === player1.name ? player2.name : player1.name;
-    messageBoard.innerHTML = currentPlayerTurn();
+    messageBoard.innerHTML = currentPlayerTurn(currentPlayerName);
   }
 
 
@@ -71,7 +73,7 @@ export const gameBoard = (() => {
 
     if (result === true) {
       winner = true;
-      messageBoard.innerHTML = winningMessage();
+      messageBoard.innerHTML = winningMessage(currentPlayerName);
       gameOn = false;
 
       return;

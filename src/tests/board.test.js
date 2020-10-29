@@ -1,5 +1,5 @@
 import {
-  winConditions, playerFactory, getBoard,
+  winConditions, playerFactory, getBoard, drawMessage, winningMessage, currentPlayerTurn,
 } from '../logic';
 
 
@@ -23,4 +23,18 @@ test('Should contain 8 different winning conditions', () => {
 
 test('The playerFactory has name', () => {
   expect(playerFactory('Player1', 0).name).toBe('Player1');
+});
+
+test('The draw message', () => {
+  expect(drawMessage()).toBe('It is a draw');
+});
+
+test('The winning message', () => {
+  const currentPlayerName = 'Paul';
+  expect(winningMessage(currentPlayerName)).toBe(`${currentPlayerName} wins`);
+});
+
+test('The turn message', () => {
+  const currentPlayerName = 'Paul';
+  expect(currentPlayerTurn(currentPlayerName)).toBe(`It is now your turn ${currentPlayerName}`);
 });
