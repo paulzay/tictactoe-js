@@ -11,8 +11,7 @@ export const getBoard = (() => {
   return board;
 });
 
-export const clearBoard = (gameOn, messageBoard, turn) => {
-  gameOn = true;
+export const clearBoard = (messageBoard, turn) => {
   messageBoard.innerHTML = turn;
   document.querySelectorAll('.cell').forEach(cell => { cell.innerHTML = ''; });
 };
@@ -48,17 +47,11 @@ export const gameBoard = (() => {
 
   document.querySelector('.game-reset').addEventListener('click', resetGame);
 
-  // const clearBoard = () => {
-  //   gameOn = true;
-  //   board = getBoard();
-  //   messageBoard.innerHTML = currentPlayerTurn();
-  //   document.querySelectorAll('.cell').forEach(cell => { cell.innerHTML = ''; });
-  //   alert('Hello');
-  // };
 
   document.querySelector('.clear-board').addEventListener('click', () => {
     board = getBoard();
-    clearBoard(gameOn, messageBoard, currentPlayerTurn());    
+    clearBoard(messageBoard, currentPlayerTurn());
+    gameOn = true;
   });
 
   function takeTurns() {
