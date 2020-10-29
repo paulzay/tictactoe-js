@@ -90,7 +90,6 @@ export const gameBoard = (() => {
   const placeMarker = (clickedCell, clickedCellIndex) => {
     board[clickedCellIndex] = currentPlayerMarker;
     clickedCell.innerHTML = currentPlayerMarker;
-    // console.log(board);
   };
   const checkCellClick = (clickedCellEvent) => {
     const clickedCell = clickedCellEvent.target;
@@ -104,6 +103,5 @@ export const gameBoard = (() => {
     checkWinner();
   };
 
-  document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', checkCellClick));
-  // document.querySelector('.clear-board').addEventListener('click', clearBoard);
+  document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', checkCellClick));  
 });
