@@ -1,11 +1,30 @@
-const playerFactory = (name, marker) => ({
+export const playerFactory = (name, marker) => ({
   name,
   marker,
 });
 
-const gameBoard = (() => {
-  let board = ['', '', '', '', '', '', '', '', ''];
+export const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
+export const getBoard = (() => {
+  const board = ['', '', '', '', '', '', '', '', ''];
+  return board;
+});
+
+export const clearBoard = (messageBoard, turn) => {
+  messageBoard.innerHTML = turn;
+  document.querySelectorAll('.cell').forEach(cell => { cell.innerHTML = ''; });
+};
+
+export const drawMessage = () => 'It is a draw';
+
+export const winningMessage = currentPlayerName => `${currentPlayerName} wins`;
+
+export const currentPlayerTurn = currentPlayerName => `It is now your turn ${currentPlayerName}`;
+
+export const gameBoard = (() => {
+  let gameOn = true;
+  let board = getBoard();
   const player1 = playerFactory('', 'X');
   const player2 = playerFactory('', 'O');
 
@@ -25,35 +44,27 @@ const gameBoard = (() => {
   let currentPlayerMarker = player1.marker;
 
   const messageBoard = document.querySelector('.game-board');
-  const currentPlayerTurn = () => `It is now your turn ${currentPlayerName}`;
-  const winningMessage = () => `${currentPlayerName} wins`;
-  const drawMessage = () => 'It is a draw';
-  let gameOn = true;
-
 
   const resetGame = () => { window.location.reload(); };
 
   document.querySelector('.game-reset').addEventListener('click', resetGame);
 
-  const clearBoard = () => {
-    gameOn = true;
-    board = ['', '', '', '', '', '', '', '', ''];
-    messageBoard.innerHTML = currentPlayerTurn();
-    document.querySelectorAll('.cell').forEach(cell => { cell.innerHTML = ''; });
-  };
-  document.querySelector('.clear-board').addEventListener('click', clearBoard);
 
-  const takeTurns = () => {
+  document.querySelector('.clear-board').addEventListener('click', () => {
+    board = getBoard();
+    clearBoard(messageBoard, currentPlayerTurn(currentPlayerName));
+    gameOn = true;
+  });
+
+  function takeTurns() {
     currentPlayerMarker = currentPlayerMarker === 'X' ? 'O' : 'X';
     currentPlayerName = currentPlayerName === player1.name ? player2.name : player1.name;
-    messageBoard.innerHTML = currentPlayerTurn();
-  };
+    messageBoard.innerHTML = currentPlayerTurn(currentPlayerName);
+  }
 
 
   const checkWinner = () => {
     let winner = false;
-    const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
-      [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     const result = winConditions.some((indices) => (
       board[indices[0]] === currentPlayerMarker
       && board[indices[1]] === currentPlayerMarker
@@ -62,7 +73,7 @@ const gameBoard = (() => {
 
     if (result === true) {
       winner = true;
-      messageBoard.innerHTML = winningMessage();
+      messageBoard.innerHTML = winningMessage(currentPlayerName);
       gameOn = false;
 
       return;
@@ -96,4 +107,3 @@ const gameBoard = (() => {
 
   document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', checkCellClick));
 });
-gameBoard();
