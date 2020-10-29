@@ -103,5 +103,5 @@ export const gameBoard = (() => {
     checkWinner();
   };
 
-  document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', checkCellClick));  
+  document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', checkCellClick));
 });
