@@ -44,7 +44,7 @@ export const gameBoard = (() => {
   let currentPlayerMarker = player1.marker;
 
   const messageBoard = document.querySelector('.game-board');
-  
+
   const resetGame = () => { window.location.reload(); };
 
   document.querySelector('.game-reset').addEventListener('click', resetGame);
